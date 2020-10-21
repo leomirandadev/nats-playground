@@ -9,8 +9,8 @@ import (
 )
 
 type msg struct {
-	Client  string
-	Message string
+	Client  string `json:"client"`
+	Message string `json:"message"`
 }
 
 func main() {
@@ -20,7 +20,7 @@ func main() {
 
 	c := connectNats()
 
-	sendMessage(c, channel, msg{Client: clientName, Message: "The Dad's on"})
+	sendMessage(c, channel, msg{Client: clientName, Message: "The Dad is on"})
 
 	subscribeChannel(c, channel)
 
@@ -29,7 +29,10 @@ func main() {
 }
 
 func generateClientName() string {
-	clientName := "client-" + strconv.FormatInt(time.Now().UnixNano(), 10)
+	milisecondsNow := time.Now().UnixNano() / int64(time.Millisecond)
+
+	clientName := "go-client-" + strconv.FormatInt(milisecondsNow, 10)
+
 	fmt.Println("Client name:", clientName)
 
 	return clientName
