@@ -15,7 +15,7 @@ type msg struct {
 
 func main() {
 
-	var channel string = "cannel-test"
+	var channel string = "channel-test"
 	var clientName string = generateClientName()
 
 	c := connectNats()
