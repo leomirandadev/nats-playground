@@ -20,7 +20,12 @@ func main() {
 
 	c := connectNats()
 
-	sendMessage(c, channel, msg{Client: clientName, Message: "The Dad is on"})
+	message := msg{
+		Client:  clientName,
+		Message: "The Dad is on",
+	}
+
+	sendMessage(c, channel, message)
 
 	subscribeChannel(c, channel)
 
